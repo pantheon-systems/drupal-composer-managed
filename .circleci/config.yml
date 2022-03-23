@@ -14,6 +14,13 @@ jobs:
       - run:
           name: Copy commits to destination repo
           command: devops/scripts/deploy-public-upstream.sh
+  check-commits:
+    executor: deployer
+    steps:
+      - checkout
+      - run:
+          name: Check validity of commits in PR
+          command: devops/scripts/check-commits.sh
 
 workflows:
   version: 2
@@ -24,3 +31,6 @@ workflows:
             branches:
               only:
                 - release
+  check-commits:
+    jobs:
+      - check-commits
