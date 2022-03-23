@@ -1,12 +1,12 @@
 # Pantheon release process documentation
 
 There are some atypical development and release procedures in use with this repository:
- 1. The currently released version of this repository lives in parallel in the `main` and `master` branches of
-    [pantheon-upstreams/drupal-project](https://github.com/pantheon-upstreams/drupal-project).  
-    `pantheon-upstreams/drupal-project` closely mirrors the development repository at [pantheon-systems/drupal-project](https://github.com/pantheon-systems/drupal-project)
+ 1. The currently released version of this repository lives in parallel in the `main` branche of
+    [pantheon-upstreams/drupal-composer-managed](https://github.com/pantheon-upstreams/drupal-composer-managed).  
+    `pantheon-upstreams/drupal-composer-managed` closely mirrors the development repository at [pantheon-systems/drupal-composer-managed](https://github.com/pantheon-systems/drupal-composer-managed)
     and is automatically updated by a CircleCI process.
- 1. Changes are made by submitting a PR against the `default` branch of `pantheon-systems/drupal-project`.
- 1. Merging a PR to `default` _does not_ create a new release of `pantheon-upstreams/drupal-project`. This allows us to
+ 1. Changes are made by submitting a PR against the `default` branch of `pantheon-systems/drupal-composer-managed`.
+ 1. Merging a PR to `default` _does not_ create a new release of `pantheon-upstreams/drupal-composer-managed`. This allows us to
     batch more than one relatively small change into a single new "release" such that the number of separate update
     events appearing on customer dashboards is more controlled.
 
@@ -19,7 +19,7 @@ There are some atypical development and release procedures in use with this repo
     names appear on the dashboard and this creates a more professional presentation.
 
 ## Cutting a new release
- 1. Update CHANGELOG.md. In the past, the copy has been created in consultation with Ari / product.
+ 1. Update CHANGELOG.md. In the past, the copy has been created in consultation with the product owner.
  1. Ensure the commit message for the last commit in this release says what we want to have appearing on the
     dashboard as an available update. See [CORE-2258](https://getpantheon.atlassian.net/browse/CORE-2258) for
     the inaugural example of such a commit message. All changes are committed to `pantheon-upstreams` as a single

@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script is pretty tailored to assuming it's running in the CircleCI environment / a fresh git clone.
-# It mirrors most commits from `pantheon-systems/drupal-recommended:release` to `pantheon-upstreams/drupal-recommended`.
+# It mirrors most commits from `pantheon-systems/drupal-composer-managed:release` to `pantheon-upstreams/drupal-composer-managed`.
 
 set -euo pipefail
 
@@ -35,7 +35,7 @@ if [[ ${#commits[@]} -eq 0 ]] ; then
 fi
 
 # Cherry-pick commits not modifying circle config onto the release branch
-git checkout -b public --track public/master
+git checkout -b public --track public/main
 git pull
 
 if [[ "$CIRCLECI" != "" ]]; then
@@ -47,6 +47,8 @@ for commit in "${commits[@]}"; do
   if [[ -z "$commit" ]] ; then
     continue
   fi
+  echo "Adding $commit:"
+  git log --format=%B -n 1 "$commit"
   git cherry-pick -n "$commit" 2>&1
   # Product request - single commit per release
   # The commit message from the last commit will be used.
@@ -56,12 +58,8 @@ done
 
 git commit -F /tmp/commit_message --author='Pantheon Automation <bot@getpantheon.com>'
 
-# Push released commits to a few branches on the upstream repo.
-# Since all commits to this repo are automated, it shouldn't hurt to put them on both branch names.
-release_branches=('master' 'main')
-for branch in "${release_branches[@]}"; do
-  git push public public:"$branch"
-done
+# Push to the public repository
+git push public main
 
 git checkout $CIRCLE_BRANCH
 
