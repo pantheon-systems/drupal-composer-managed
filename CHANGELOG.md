@@ -1,9 +1,22 @@
 # Changelog
 
-All notable changes specific to pantheon-upstreams/drupal-recommended are noted here.
+All notable changes specific to pantheon-upstreams/drupal-composer-managed are noted here.
 
 
-## Pantheon Update #2 - tbd
+## Pantheon Update #3 - 2022-03-23
+
+### Changed
+
+- Renamed repository from pantheon-upstreams/drupal-recommended to pantheon-upstreams/drupal-composer-managed
+- Switched the default branch from 'master' to 'main'
+
+### Added
+
+- Created a Composer pre-update script to ensure that the version of the upstream-configuration path repository is always 'dev-main', regardless of what branch / multidev the "composer update" command was run on.
+- Added a new command, "composer upstream-require", for adding dependencies to the upstream-configuration path repository in custom upstreams.
+
+
+## Pantheon Update #2 - 2021-11-01
 
 ### Changed
 
